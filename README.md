@@ -1,29 +1,37 @@
-# LinkedIn Job Helper — 荷兰语要求 & 简历匹配标注
+# LinkedIn Job Helper — Dutch Requirement, Resume Match & Seniority Annotations
 
-一个纯本地运行的 Chrome 插件：在你浏览 LinkedIn 职位详情时，右下角弹出一个面板，显示：
+**English** | [中文](README.zh-CN.md)
 
-1. **荷兰语要求判断** — 绿色（无需荷兰语 / 英语环境）、黄色（荷兰语加分项 / 不确定）、红色（要求荷兰语，或职位描述本身就是荷兰语写的）。
-2. **简历匹配度** — 把职位描述的高频关键词与你保存的简历做对比，给出百分比，并列出匹配到的关键词和你简历里缺少的关键词。
+A fully local Chrome extension that annotates LinkedIn job postings while you browse:
 
-所有数据（简历文本）只存在你本地浏览器的 `chrome.storage.local` 中，不上传任何服务器。
+1. **Dutch language requirement** — green (no Dutch needed / English working environment), yellow (Dutch is a plus / unclear), red (Dutch required, or the posting itself is written in Dutch).
+2. **Resume skill match** — scans both your resume and the job description against a curated dictionary of ~120 skill groups (multi-word phrases and aliases included, e.g. `Power BI` = `powerbi`, `NLP` = `natural language processing`) and shows a match percentage, the skills you have, and the skills the job asks for that your resume doesn't mention.
+3. **Seniority detection** — 🎓 Intern / 🌱 Junior / 🌿 Mid / 🌳 Senior, inferred from the job title first (a "Senior Data Scientist" posting is senior regardless of wording) and otherwise from experience requirements in the description (`5+ years of experience`, `2-4 years`, Dutch `minimaal 3 jaar ervaring`, …).
 
-## 安装步骤
+**Batch annotation:** every card in the job list gets annotated automatically — no need to click into each posting. Descriptions are fetched through LinkedIn's own job-posting endpoint using your current session, throttled to ~1 request/second and cached for 7 days. Clicking into a posting shows a detail panel with the full skill breakdown.
 
-1. 打开 Chrome，地址栏输入 `chrome://extensions`。
-2. 打开右上角的 **开发者模式（Developer mode）**。
-3. 点击 **加载已解压的扩展程序（Load unpacked）**，选择本文件夹 `C:\Users\Arya\linkedin-job-helper`。
-4. 点击插件的 **详情 → 扩展程序选项**（或面板上的"打开设置"按钮），粘贴你的简历全文并保存。
-5. 打开 `linkedin.com/jobs` 浏览任意职位，点开一个职位后面板会自动出现。
+Your resume is stored only in your browser's local extension storage (`chrome.storage.local`). Nothing is ever uploaded anywhere.
 
-## 使用说明
+## Install
 
-- **列表批量标注**：打开职位搜索/推荐列表后，每张职位卡片上会自动出现标注（🟢 无需荷兰语 / 🟡 加分项或不确定 / 🔴 需要荷兰语，以及技能匹配百分比），外加资历标注（🎓 实习 / 🌱 Junior / 🌿 中级 / 🌳 Senior，含识别出的年限要求，如 "5年+"）。资历优先看职位标题（标题写 Senior 就按 Senior 算），再看描述中的 "X+ years experience / X jaar ervaring" 等表述。插件通过 LinkedIn 自己的职位接口获取每个职位的完整描述，限速约每秒 1 个请求，结果缓存 7 天，同一职位不会重复请求。
-- **详情面板**：点开某个职位后，右下角面板显示完整分析（匹配/缺少的具体技能列表）。
-- "重点技能关键词"里填你最想匹配的技能，会加倍计分。
-- 匹配度只是关键词层面的粗略参考：>55% 绿色，35–55% 黄色，<35% 红色。
+1. Clone or download this repository.
+2. Open `chrome://extensions` and enable **Developer mode**.
+3. Click **Load unpacked** and select the repository folder.
+4. Open the extension's options page, paste your resume as plain text, optionally add weighted keywords, and save.
+5. Browse `linkedin.com/jobs` — list cards get badges automatically; open any posting for the detail panel.
 
-## 已知限制
+## Usage notes
 
-- LinkedIn 经常改版页面结构（CSS 类名），如果某天面板不再出现，需要更新 `content.js` 里的 `DESC_SELECTORS` 选择器。
-- 匹配算法是本地关键词对比，不理解语义。想要更聪明的匹配（比如用 Claude API 逐条打分），可以在这个基础上扩展。
-- 插件只读取你正在浏览的页面内容，不做任何自动抓取或批量请求，属于正常个人使用范畴。
+- **Weighted keywords**: skills you list in the options page count double when they appear in a job description. Swap in a different keyword set (e.g. data engineering vs. data science) and all cached jobs re-score instantly.
+- Updating your resume or keywords invalidates the job cache automatically.
+- Match score thresholds: ≥55% green, 35–55% yellow, <35% red. It's a keyword-level heuristic, not semantic understanding — treat it as a triage signal, not a verdict.
+
+## Known limitations
+
+- LinkedIn changes its DOM frequently. If the panel stops appearing, the selectors in `content.js` (`DESC_SELECTORS`) likely need updating.
+- Some non-public postings can't be fetched from the list view ("no description available" badge); open the posting to see the detail panel instead.
+- The extension only analyzes jobs you actually browse — it performs no bulk scraping. Keep it that way: it fetches at most the postings visible in your list, politely throttled.
+
+## Disclaimer
+
+Personal-use tool. Not affiliated with or endorsed by LinkedIn. Use at your own discretion and in accordance with LinkedIn's terms of service.
