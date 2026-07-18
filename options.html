@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <title>LinkedIn Job Helper 设置</title>
+  <style>
+    body {
+      font-family: -apple-system, "Segoe UI", Roboto, "Microsoft YaHei", sans-serif;
+      max-width: 720px;
+      margin: 32px auto;
+      padding: 0 16px;
+      color: #1f2328;
+      line-height: 1.5;
+    }
+    h1 { font-size: 20px; }
+    label { font-weight: 600; display: block; margin: 18px 0 6px; }
+    .hint { color: #667085; font-size: 13px; margin: 2px 0 8px; }
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      border: 1px solid #d0d5dd;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 13px;
+      font-family: inherit;
+    }
+    #resume { height: 320px; }
+    #keywords { height: 80px; }
+    button {
+      margin-top: 16px;
+      padding: 9px 22px;
+      border: none;
+      border-radius: 8px;
+      background: #0a66c2;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    button:hover { background: #084e96; }
+    #status { margin-left: 12px; color: #05603a; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <h1>LinkedIn Job Helper 设置</h1>
+
+  <label for="resume">你的简历（纯文本）</label>
+  <div class="hint">直接把简历内容全文粘贴进来即可。数据只保存在你本地浏览器中，不会上传到任何服务器。</div>
+  <textarea id="resume" placeholder="粘贴你的简历全文……"></textarea>
+
+  <label for="keywords">重点技能关键词（可选，加权计分）</label>
+  <div class="hint">用逗号或换行分隔，例如：Python, machine learning, SQL, econometrics。这些词在职位描述中出现时会加倍计分。</div>
+  <textarea id="keywords" placeholder="Python, SQL, machine learning"></textarea>
+
+  <div>
+    <button id="save">保存</button>
+    <span id="status"></span>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

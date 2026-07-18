@@ -1,0 +1,7 @@
+# Personal data — never commit (contains full resume & phone number)
+resume.txt
+test.html
+test-list.html
+
+# Build artifacts
+*.zip

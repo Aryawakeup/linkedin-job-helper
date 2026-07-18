@@ -1,0 +1,99 @@
+#ljh-panel {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999999;
+  width: 320px;
+  max-height: 60vh;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #d0d5dd;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  padding: 12px 14px;
+  font-family: -apple-system, "Segoe UI", Roboto, "Microsoft YaHei", sans-serif;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #1f2328;
+}
+
+#ljh-panel .ljh-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+#ljh-panel .ljh-title {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+#ljh-panel .ljh-close {
+  border: none;
+  background: none;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  color: #667085;
+  padding: 0 2px;
+}
+
+#ljh-panel .ljh-row {
+  margin: 6px 0 2px;
+}
+
+#ljh-panel .ljh-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 12.5px;
+}
+
+#ljh-panel .ljh-good { background: #d1fadf; color: #05603a; }
+#ljh-panel .ljh-warn { background: #fef0c7; color: #93370d; }
+#ljh-panel .ljh-bad  { background: #fee4e2; color: #912018; }
+
+#ljh-panel .ljh-kw {
+  margin: 4px 0;
+  word-break: break-word;
+}
+
+#ljh-panel .ljh-dim { color: #667085; font-size: 12px; }
+
+#ljh-panel .ljh-options {
+  margin-top: 8px;
+  width: 100%;
+  padding: 6px 0;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  background: #f9fafb;
+  cursor: pointer;
+  font-size: 12.5px;
+}
+
+#ljh-panel .ljh-options:hover { background: #f2f4f7; }
+
+/* ---- Job-card badges (list view) ---- */
+
+.ljh-card-badge {
+  display: block;
+  padding: 2px 12px 6px;
+}
+
+.ljh-card-badge .ljh-cb {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 600;
+  font-family: -apple-system, "Segoe UI", Roboto, "Microsoft YaHei", sans-serif;
+  line-height: 1.5;
+}
+
+.ljh-card-badge .ljh-cb-good { background: #d1fadf; color: #05603a; }
+.ljh-card-badge .ljh-cb-warn { background: #fef0c7; color: #93370d; }
+.ljh-card-badge .ljh-cb-bad  { background: #fee4e2; color: #912018; }
+.ljh-card-badge .ljh-cb-wait { background: #f2f4f7; color: #667085; }
